@@ -1,7 +1,8 @@
-package com.meeweel.carlist
+package com.meeweel.carlist.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.meeweel.carlist.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

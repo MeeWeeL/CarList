@@ -1,5 +1,10 @@
 package com.meeweel.carlist.domain
 
-enum class CarColor {
-    RED, GREEN, BLUE, BLACK, WHITE, UNKNOWN
+enum class CarColor(val color: String) {
+    RED("Red"),
+    GREEN("Green"),
+    BLUE("Blue"),
+    BLACK("Black"),
+    WHITE("White"),
+    UNKNOWN("Unknown")
 }
