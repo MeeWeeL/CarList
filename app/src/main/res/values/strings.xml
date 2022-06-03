@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Car List</string>
+    <string name="item_recycler_default_cost">1200000 rub</string>
+    <string name="item_recycler_default_condition">2008, 20000km</string>
+    <string name="item_recycler_default_color">Black</string>
+    <string name="item_recycler_default_model">X6</string>
+    <string name="item_recycler_default_brand">BMW</string>
+    <string name="recyclerItemImageContent">recyclerItemImageContent</string>
 </resources>

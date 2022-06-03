@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--  *****************  Main Recycler Item Styles  *****************  -->
+
+    <!--  CardView  -->
+    <style name="recyclerItemCardStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/item_recycler_card_margin_top</item>
+        <item name="cardCornerRadius">@dimen/item_recycler_card_corner_radius</item>
+        <item name="cardElevation">@dimen/item_recycler_card_elevation</item>
+    </style>
+
+    <!--  Image  -->
+    <style name="recyclerItemImageStyle">
+        <item name="android:layout_width">@dimen/item_recycler_image_width</item>
+        <item name="android:layout_height">@dimen/item_recycler_image_height</item>
+        <item name="android:src">@drawable/default_car_image</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <!--  Brand  -->
+    <style name="recyclerItemBrandStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/item_recycler_default_brand</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/item_recycler_brand_text_size</item>
+    </style>
+
+    <!--  Brand  -->
+    <style name="recyclerItemColorStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">start</item>
+        <item name="android:text">@string/item_recycler_default_color</item>
+    </style>
+
+    <!--  Condition  -->
+    <style name="recyclerItemConditionStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">start</item>
+        <item name="android:text">@string/item_recycler_default_condition</item>
+    </style>
+
+    <!--  Model  -->
+    <style name="recyclerItemModelStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/item_recycler_default_model</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--  Cost  -->
+    <style name="recyclerItemCostStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">end|center</item>
+        <item name="android:text">@string/item_recycler_default_cost</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--  Description LinearLayout  -->
+    <style name="recyclerDescriptionLinearLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingStart">@dimen/item_recycler_description_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/item_recycler_description_horizontal_padding</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!--  Root LinearLayout  -->
+    <style name="recyclerRootLinearLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+</resources>
