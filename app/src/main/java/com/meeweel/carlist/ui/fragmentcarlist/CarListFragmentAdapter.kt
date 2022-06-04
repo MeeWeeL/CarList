@@ -15,6 +15,7 @@ class CarListFragmentAdapter :
     ListAdapter<CarModel, CarListFragmentAdapter.CarListViewHolder>(DiffCallback) {
 
     private var zoomListener: CarListFragment.OnImageZoomListener? = null
+    private var itemListener: CarListFragment.OnItemListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarListViewHolder {
         return CarListViewHolder(
@@ -47,6 +48,9 @@ class CarListFragmentAdapter :
                 image.setOnClickListener {
                     zoomListener?.onImageClick(carItem.image)
                 }
+                root.setOnClickListener {
+                    itemListener?.onItemClick(carItem.id)
+                }
             }
         }
 
@@ -65,6 +69,14 @@ class CarListFragmentAdapter :
 
     fun removeZoomListener() {
         this.zoomListener = null
+    }
+
+    fun setDetailsListener(zoomListener: CarListFragment.OnItemListener) {
+        this.itemListener = zoomListener
+    }
+
+    fun removeDetailsListener() {
+        this.itemListener = null
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<CarModel>() {

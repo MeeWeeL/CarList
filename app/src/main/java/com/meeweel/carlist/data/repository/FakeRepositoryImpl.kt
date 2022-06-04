@@ -110,4 +110,10 @@ class FakeRepositoryImpl : Repository {
     )
 
     override fun getCarList(): Single<List<CarModel>> = Single.just(carList)
+    override fun getCarById(carId: Int): Single<CarModel> {
+        for (item in carList) {
+            if (item.id == carId) return Single.just(item)
+        }
+        return Single.just(carList[0])
+    }
 }

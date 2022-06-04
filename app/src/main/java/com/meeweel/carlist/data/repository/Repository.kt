@@ -6,4 +6,5 @@ import io.reactivex.rxjava3.core.Single
 interface Repository {
 
     fun getCarList() : Single<List<CarModel>>
+    fun getCarById(carId: Int) : Single<CarModel>
 }

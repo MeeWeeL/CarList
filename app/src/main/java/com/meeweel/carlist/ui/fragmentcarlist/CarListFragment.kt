@@ -8,15 +8,18 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.meeweel.carlist.R
 import com.meeweel.carlist.databinding.FragmentFullscreenPhotoBinding
 import com.meeweel.carlist.databinding.FragmentMainRecyclerBinding
 import com.meeweel.carlist.domain.CarListState
+import com.meeweel.carlist.ui.fragmentcardetails.CarDetailsFragment.Companion.ARG_CAR_ID
 
 
 class CarListFragment : Fragment() {
@@ -50,6 +53,15 @@ class CarListFragment : Fragment() {
         adapter.setZoomListener(object : OnImageZoomListener {
             override fun onImageClick(imageUrl: String) {
                 showFilterDialog(imageUrl)
+            }
+        })
+        adapter.setDetailsListener(object : OnItemListener {
+            override fun onItemClick(carId: Int) {
+                findNavController().navigate(
+                    R.id.action_carListFragment_to_carDetailsFragment, bundleOf(
+                        ARG_CAR_ID to carId
+                    )
+                )
             }
         })
     }
@@ -108,6 +120,10 @@ class CarListFragment : Fragment() {
 
     interface OnImageZoomListener {
         fun onImageClick(imageUrl: String)
+    }
+
+    interface OnItemListener {
+        fun onItemClick(carId: Int)
     }
 
     override fun onDestroy() {

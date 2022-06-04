@@ -9,5 +9,18 @@
         android:id="@+id/carListFragment"
         android:name="com.meeweel.carlist.ui.fragmentcarlist.CarListFragment"
         android:label="fragment_main_recycler"
-        tools:layout="@layout/fragment_main_recycler" />
+        tools:layout="@layout/fragment_main_recycler" >
+        <action
+            android:id="@+id/action_carListFragment_to_carDetailsFragment"
+            app:destination="@id/carDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carDetailsFragment"
+        android:name="com.meeweel.carlist.ui.fragmentcardetails.CarDetailsFragment"
+        android:label="CarDetailsFragment"
+        tools:layout="@layout/fragment_car_details" >
+        <argument
+            android:name="Car ID"
+            app:argType="integer"/>
+    </fragment>
 </navigation>
