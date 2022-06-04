@@ -33,7 +33,11 @@ class CarListFragmentAdapter :
             itemBinding.apply {
                 brand.text = carItem.brand.brand
                 model.text = carItem.model
-                cost.text = carItem.cost.toString()
+                color.text = carItem.color.color
+                ("${carItem.year}, ${carItem.mileage} km").also {
+                    condition.text = it
+                }
+                ("${carItem.cost} RUB").also { cost.text = it }
             }
         }
     }
