@@ -2,12 +2,11 @@ package com.meeweel.carlist.ui.fragmentcarlist
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,8 +15,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.meeweel.carlist.R
+import com.meeweel.carlist.databinding.CarListRecyclerFilterBinding
 import com.meeweel.carlist.databinding.FragmentFullscreenPhotoBinding
 import com.meeweel.carlist.databinding.FragmentMainRecyclerBinding
+import com.meeweel.carlist.domain.CarBrand
 import com.meeweel.carlist.domain.CarListState
 import com.meeweel.carlist.ui.fragmentcardetails.CarDetailsFragment.Companion.ARG_CAR_ID
 
@@ -47,12 +48,22 @@ class CarListFragment : Fragment() {
         setZoomListener()
         setRecyclerView()
         setObserver()
+        binding.toolBar.menu.apply {
+            findItem(R.id.filter).setOnMenuItemClickListener {
+                showZoomedCarDialog()
+                return@setOnMenuItemClickListener true
+            }
+            findItem(R.id.sort).setOnMenuItemClickListener {
+                showPopupMenu(binding.toolBar)
+                return@setOnMenuItemClickListener true
+            }
+        }
     }
 
     private fun setZoomListener() {
         adapter.setZoomListener(object : OnImageZoomListener {
             override fun onImageClick(imageUrl: String) {
-                showFilterDialog(imageUrl)
+                showZoomedCarDialog(imageUrl)
             }
         })
         adapter.setDetailsListener(object : OnItemListener {
@@ -66,7 +77,7 @@ class CarListFragment : Fragment() {
         })
     }
 
-    private fun showFilterDialog(imageUrl: String) {
+    private fun showZoomedCarDialog(imageUrl: String) {
         val dialog = Dialog(requireContext())
         val zoomBinding = FragmentFullscreenPhotoBinding.inflate(layoutInflater)
         dialog.setContentView(zoomBinding.root)
@@ -114,8 +125,55 @@ class CarListFragment : Fragment() {
         }
         is CarListState.Error -> {
             binding.loadingLayout.visibility = View.GONE
-            Toast.makeText(requireContext(), data.error.message, Toast.LENGTH_SHORT).show()
+            data.error.message?.let { toast(it) }
         }
+    }
+
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(requireContext(), view, Gravity.END)
+        popupMenu.inflate(R.menu.sort_menu)
+        popupMenu.setForceShowIcon(true)
+        popupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.by_brand -> {
+                    toast("by brand")
+                    return@setOnMenuItemClickListener true
+                }
+                R.id.by_model -> {
+                    toast("by model")
+                    return@setOnMenuItemClickListener true
+                }
+                R.id.by_cost_down -> {
+                    toast("by cost down")
+                    return@setOnMenuItemClickListener true
+                }
+                R.id.by_cost_up -> {
+                    toast("by cost up")
+                    return@setOnMenuItemClickListener true
+                }
+                else -> return@setOnMenuItemClickListener false
+            }
+        }
+        popupMenu.show()
+    }
+
+    private fun showZoomedCarDialog() {
+        val dialog = Dialog(requireContext())
+        val filterBinding = CarListRecyclerFilterBinding.inflate(layoutInflater)
+        dialog.setContentView(filterBinding.root)
+        val brands = CarBrand.values()
+        filterBinding.brandSpinner.adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, brands)
+        dialog.show()
+
+        filterBinding.filterOkBtn.setOnClickListener {
+            toast(brands[filterBinding.brandSpinner.selectedItemPosition].brand)
+            dialog.cancel()
+        }
+    }
+
+    private fun toast(text: String) {
+        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
     }
 
     interface OnImageZoomListener {

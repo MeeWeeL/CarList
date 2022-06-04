@@ -6,5 +6,6 @@ enum class CarColor(val color: String) {
     BLUE("Blue"),
     BLACK("Black"),
     WHITE("White"),
-    UNKNOWN("Unknown")
+    UNKNOWN("Unknown"),
+    ALL("All")
 }

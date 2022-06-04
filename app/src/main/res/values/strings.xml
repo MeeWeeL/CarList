@@ -20,4 +20,11 @@
     <string name="cost_label_default_text">Cost :</string>
     <string name="cost_default_text">3650000 RUB</string>
     <string name="details_image">DetailsImage</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
+    <string name="ok">OK</string>
+    <string name="sort_by_brand_name">Sort by brand name</string>
+    <string name="sort_by_model">Sort by model</string>
+    <string name="sort_by_cost_down">Sort by cost down</string>
+    <string name="sort_by_cost_up">Sort by cost up</string>
 </resources>

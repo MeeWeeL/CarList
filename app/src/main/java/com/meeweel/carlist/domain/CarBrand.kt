@@ -5,5 +5,6 @@ enum class CarBrand(val brand: String) {
     BMW("BMW"),
     MERCEDES("Mercedes"),
     KIA("Kia"),
-    UNKNOWN("Unknown")
+    UNKNOWN("Unknown"),
+    ALL("All")
 }
