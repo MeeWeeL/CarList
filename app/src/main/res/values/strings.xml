@@ -6,4 +6,5 @@
     <string name="item_recycler_default_model">X6</string>
     <string name="item_recycler_default_brand">BMW</string>
     <string name="recyclerItemImageContent">recyclerItemImageContent</string>
+    <string name="zoomed_image">ZoomedImage</string>
 </resources>
