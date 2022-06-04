@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/carListFragment"
-        android:name="com.meeweel.carlist.ui.CarListFragment"
+        android:name="com.meeweel.carlist.ui.fragmentcarlist.CarListFragment"
         android:label="fragment_main_recycler"
         tools:layout="@layout/fragment_main_recycler" />
 </navigation>

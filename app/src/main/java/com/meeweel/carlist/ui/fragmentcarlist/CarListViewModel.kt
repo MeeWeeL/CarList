@@ -1,4 +1,4 @@
-package com.meeweel.carlist.ui
+package com.meeweel.carlist.ui.fragmentcarlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

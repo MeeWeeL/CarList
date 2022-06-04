@@ -1,4 +1,4 @@
-package com.meeweel.carlist.ui
+package com.meeweel.carlist.ui.fragmentcarlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,6 +13,8 @@ import com.meeweel.carlist.domain.CarModel
 
 class CarListFragmentAdapter :
     ListAdapter<CarModel, CarListFragmentAdapter.CarListViewHolder>(DiffCallback) {
+
+    private var zoomListener: CarListFragment.OnImageZoomListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarListViewHolder {
         return CarListViewHolder(
@@ -42,6 +44,9 @@ class CarListFragmentAdapter :
                 }
                 ("${carItem.cost} RUB").also { cost.text = it }
                 setPicture(this.image, carItem.image)
+                image.setOnClickListener {
+                    zoomListener?.onImageClick(carItem.image)
+                }
             }
         }
 
@@ -52,6 +57,14 @@ class CarListFragmentAdapter :
                 .placeholder(R.drawable.ic_car)
                 .into(imageView)
         }
+    }
+
+    fun setZoomListener(zoomListener: CarListFragment.OnImageZoomListener) {
+        this.zoomListener = zoomListener
+    }
+
+    fun removeZoomListener() {
+        this.zoomListener = null
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<CarModel>() {
