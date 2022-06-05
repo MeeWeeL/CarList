@@ -12,14 +12,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.meeweel.carlist.R
+import com.meeweel.carlist.databinding.BottomSheetCarChangingBinding
 import com.meeweel.carlist.databinding.CarListRecyclerFilterBinding
 import com.meeweel.carlist.databinding.FragmentFullscreenPhotoBinding
 import com.meeweel.carlist.databinding.FragmentMainRecyclerBinding
 import com.meeweel.carlist.domain.CarBrand
+import com.meeweel.carlist.domain.CarColor
 import com.meeweel.carlist.domain.CarListState
+import com.meeweel.carlist.domain.CarModel
 import com.meeweel.carlist.ui.fragmentcardetails.CarDetailsFragment.Companion.ARG_CAR_ID
 
 
@@ -50,7 +55,7 @@ class CarListFragment : Fragment() {
         setObserver()
         binding.toolBar.menu.apply {
             findItem(R.id.filter).setOnMenuItemClickListener {
-                showZoomedCarDialog()
+                showFilterDialog()
                 return@setOnMenuItemClickListener true
             }
             findItem(R.id.sort).setOnMenuItemClickListener {
@@ -58,12 +63,44 @@ class CarListFragment : Fragment() {
                 return@setOnMenuItemClickListener true
             }
         }
+        setFAB()
+    }
+
+    private fun setFAB() {
+        binding.fab.setOnClickListener {
+            callBottomSheetDialog()
+        }
+    }
+
+    private fun callBottomSheetDialog(car: CarModel? = null) {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        val bottomSheetBinding = BottomSheetCarChangingBinding.inflate(layoutInflater)
+        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+        val brands = CarBrand.values()
+        bottomSheetBinding.bottomSheetBrandSpinner.adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, brands)
+        val colors = CarColor.values()
+        bottomSheetBinding.bottomSheetColorSpinner.adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, colors)
+        if (car != null) {
+            setImage(bottomSheetBinding.bottomSheetCarImage, car.image)
+            bottomSheetBinding.apply {
+                bottomSheetModel.setText(car.model)
+                bottomSheetMileage.setText(car.mileage.toString())
+                bottomSheetYear.setText(car.year.toString())
+                bottomSheetCost.setText(car.cost.toString())
+                bottomSheetAddBtn.text = UPDATE
+            }
+        } else {
+            setImage(bottomSheetBinding.bottomSheetCarImage, EXAMPLE_IMAGE_URL)
+        }
+        bottomSheetDialog.show()
     }
 
     private fun setZoomListener() {
         adapter.setZoomListener(object : OnImageZoomListener {
             override fun onImageClick(imageUrl: String) {
-                showZoomedCarDialog(imageUrl)
+                showPhotoDialog(imageUrl)
             }
         })
         adapter.setDetailsListener(object : OnItemListener {
@@ -75,15 +112,11 @@ class CarListFragment : Fragment() {
                 )
             }
         })
-    }
-
-    private fun showZoomedCarDialog(imageUrl: String) {
-        val dialog = Dialog(requireContext())
-        val zoomBinding = FragmentFullscreenPhotoBinding.inflate(layoutInflater)
-        dialog.setContentView(zoomBinding.root)
-        dialog.show()
-        dialog.window?.attributes = getWindowParams(dialog)
-        setImage(zoomBinding.zoomedImage, imageUrl)
+        adapter.setLongClickListener(object : OnItemLongClickListener {
+            override fun onItemClick(car: CarModel) {
+                callBottomSheetDialog(car)
+            }
+        })
     }
 
     private fun getWindowParams(dialog: Dialog): WindowManager.LayoutParams {
@@ -112,12 +145,18 @@ class CarListFragment : Fragment() {
     private fun setRecyclerView() {
         binding.mainRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.mainRecycler.adapter = adapter
+        ItemTouchHelper(CarListSwipeHelper(object : SwipeControllerActions {
+            override fun onSwipeLeft(car: CarModel) {
+                callBottomSheetDialog(car)
+            }
+        }, adapter)).attachToRecyclerView(binding.mainRecycler)
     }
 
     private fun renderData(data: CarListState) = when (data) {
         is CarListState.Success -> {
             val carList = data.carList
             adapter.submitList(carList)
+            binding.mainRecycler.smoothScrollToPosition(0)
             binding.loadingLayout.visibility = View.GONE
         }
         is CarListState.Loading -> {
@@ -140,13 +179,21 @@ class CarListFragment : Fragment() {
                 R.id.by_cost_down -> viewModel.sort(CarListViewModel.SortBy.COST_DOWN)
                 R.id.by_cost_up -> viewModel.sort(CarListViewModel.SortBy.COST_UP)
             }
-            binding.mainRecycler.smoothScrollToPosition(0)
             return@setOnMenuItemClickListener true
         }
         popupMenu.show()
     }
 
-    private fun showZoomedCarDialog() {
+    private fun showPhotoDialog(imageUrl: String) {
+        val dialog = Dialog(requireContext())
+        val zoomBinding = FragmentFullscreenPhotoBinding.inflate(layoutInflater)
+        dialog.setContentView(zoomBinding.root)
+        dialog.show()
+        dialog.window?.attributes = getWindowParams(dialog)
+        setImage(zoomBinding.zoomedImage, imageUrl)
+    }
+
+    private fun showFilterDialog() {
         val dialog = Dialog(requireContext())
         val filterBinding = CarListRecyclerFilterBinding.inflate(layoutInflater)
         dialog.setContentView(filterBinding.root)
@@ -158,7 +205,6 @@ class CarListFragment : Fragment() {
         filterBinding.filterOkBtn.setOnClickListener {
             viewModel.filter(brands[filterBinding.brandSpinner.selectedItemPosition])
             toast(brands[filterBinding.brandSpinner.selectedItemPosition].brand)
-            binding.mainRecycler.smoothScrollToPosition(0)
             dialog.cancel()
         }
     }
@@ -175,9 +221,19 @@ class CarListFragment : Fragment() {
         fun onItemClick(carId: Int)
     }
 
+    interface OnItemLongClickListener {
+        fun onItemClick(car: CarModel)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
         adapter.removeListeners()
+    }
+
+    companion object {
+        const val UPDATE = "Update"
+        const val EXAMPLE_IMAGE_URL =
+            "https://i.pinimg.com/originals/a0/20/66/a020669bafe5cd139d3958ff3563c23c.jpg"
     }
 }
