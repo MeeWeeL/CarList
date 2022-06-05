@@ -67,16 +67,13 @@ class CarListFragmentAdapter :
         this.zoomListener = zoomListener
     }
 
-    fun removeZoomListener() {
+    fun removeListeners() {
         this.zoomListener = null
+        this.itemListener = null
     }
 
     fun setDetailsListener(zoomListener: CarListFragment.OnItemListener) {
         this.itemListener = zoomListener
-    }
-
-    fun removeDetailsListener() {
-        this.itemListener = null
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<CarModel>() {

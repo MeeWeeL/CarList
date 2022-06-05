@@ -135,24 +135,13 @@ class CarListFragment : Fragment() {
         popupMenu.setForceShowIcon(true)
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.by_brand -> {
-                    toast("by brand")
-                    return@setOnMenuItemClickListener true
-                }
-                R.id.by_model -> {
-                    toast("by model")
-                    return@setOnMenuItemClickListener true
-                }
-                R.id.by_cost_down -> {
-                    toast("by cost down")
-                    return@setOnMenuItemClickListener true
-                }
-                R.id.by_cost_up -> {
-                    toast("by cost up")
-                    return@setOnMenuItemClickListener true
-                }
-                else -> return@setOnMenuItemClickListener false
+                R.id.by_brand -> viewModel.sort(CarListViewModel.SortBy.BRAND_NAME)
+                R.id.by_model -> viewModel.sort(CarListViewModel.SortBy.MODEL)
+                R.id.by_cost_down -> viewModel.sort(CarListViewModel.SortBy.COST_DOWN)
+                R.id.by_cost_up -> viewModel.sort(CarListViewModel.SortBy.COST_UP)
             }
+            binding.mainRecycler.smoothScrollToPosition(0)
+            return@setOnMenuItemClickListener true
         }
         popupMenu.show()
     }
@@ -167,7 +156,9 @@ class CarListFragment : Fragment() {
         dialog.show()
 
         filterBinding.filterOkBtn.setOnClickListener {
+            viewModel.filter(brands[filterBinding.brandSpinner.selectedItemPosition])
             toast(brands[filterBinding.brandSpinner.selectedItemPosition].brand)
+            binding.mainRecycler.smoothScrollToPosition(0)
             dialog.cancel()
         }
     }
@@ -187,6 +178,6 @@ class CarListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        adapter.removeZoomListener()
+        adapter.removeListeners()
     }
 }
