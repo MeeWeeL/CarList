@@ -1,13 +1,13 @@
-package com.meeweel.carlist.data.repository
+package com.meeweel.carlist.data.remote
 
 import com.meeweel.carlist.domain.CarBrand
 import com.meeweel.carlist.domain.CarColor
 import com.meeweel.carlist.domain.CarModel
 import io.reactivex.rxjava3.core.Single
 
-class FakeRepositoryImpl : Repository {
+class FakeRemoteDataSourceImpl : RemoteDataSource {
 
-    private val carList: List<CarModel> = listOf(
+    private val carList: MutableList<CarModel> = mutableListOf(
         CarModel(
             1,
             CarBrand.BMW,
@@ -110,10 +110,4 @@ class FakeRepositoryImpl : Repository {
     )
 
     override fun getCarList(): Single<List<CarModel>> = Single.just(carList)
-    override fun getCarById(carId: Int): Single<CarModel> {
-        for (item in carList) {
-            if (item.id == carId) return Single.just(item)
-        }
-        return Single.just(carList[0])
-    }
 }

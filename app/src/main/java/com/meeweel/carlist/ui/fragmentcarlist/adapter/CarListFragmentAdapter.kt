@@ -1,4 +1,4 @@
-package com.meeweel.carlist.ui.fragmentcarlist
+package com.meeweel.carlist.ui.fragmentcarlist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.meeweel.carlist.R
 import com.meeweel.carlist.databinding.ItemMainRecyclerBinding
 import com.meeweel.carlist.domain.CarModel
+import com.meeweel.carlist.ui.fragmentcarlist.CarListFragment
 
 class CarListFragmentAdapter :
     ListAdapter<CarModel, CarListFragmentAdapter.CarListViewHolder>(DiffCallback) {
@@ -77,7 +78,7 @@ class CarListFragmentAdapter :
         this.itemListener = null
     }
 
-    fun getItemByPosition(position: Int) = getItem(position)
+    fun getItemByPosition(position: Int): CarModel = getItem(position)
 
     fun setDetailsListener(zoomListener: CarListFragment.OnItemListener) {
         this.itemListener = zoomListener

@@ -3,15 +3,16 @@ package com.meeweel.carlist.ui.fragmentcarlist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.meeweel.carlist.data.repository.FakeRepositoryImpl
 import com.meeweel.carlist.data.repository.Repository
+import com.meeweel.carlist.data.repository.RepositoryImpl
 import com.meeweel.carlist.domain.CarBrand
 import com.meeweel.carlist.domain.CarListState
 import com.meeweel.carlist.domain.CarModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class CarListViewModel(private val repository: Repository = FakeRepositoryImpl()) : ViewModel() {
+class CarListViewModel(private val repository: Repository = RepositoryImpl()) : ViewModel() {
 
     private var dataList: List<CarModel> = listOf()
     private val liveDataToObserve: MutableLiveData<CarListState> = MutableLiveData()
@@ -26,14 +27,28 @@ class CarListViewModel(private val repository: Repository = FakeRepositoryImpl()
 
     private fun getDataFromRepository() {
         repository.getCarList()
-            .observeOn(Schedulers.io())
+            .subscribeForCars()
+    }
+
+    private fun getRemoteData() {
+        repository.getRemoteData()
+            .subscribeForCars()
+    }
+
+    private fun Single<List<CarModel>>.subscribeForCars() {
+        this.observeOn(Schedulers.io())
             .subscribeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 liveDataToObserve.postValue(CarListState.Loading)
             }
             .subscribe({
-                dataList = it
-                filterList()
+                if (it.isEmpty()) {
+                    getRemoteData()
+                }
+                else {
+                    dataList = it
+                    filterList()
+                }
             }, {
                 liveDataToObserve.postValue(CarListState.Error(it))
             })
@@ -68,5 +83,14 @@ class CarListViewModel(private val repository: Repository = FakeRepositoryImpl()
             }
         }
         liveDataToObserve.postValue(CarListState.Success(newList))
+    }
+
+    fun addNewCarData(newCarData: CarModel) {
+        repository.addNewCarData(newCarData)
+            .observeOn(Schedulers.io())
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                getCarList()
+            },{})
     }
 }

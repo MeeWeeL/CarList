@@ -1,4 +1,4 @@
-package com.meeweel.carlist.ui.fragmentcarlist
+package com.meeweel.carlist.ui.fragmentcarlist.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Canvas
@@ -57,7 +57,7 @@ class CarListSwipeHelper(private val controller: SwipeControllerActions, private
         actionState: Int, isCurrentlyActive: Boolean
     ) {
         if (actionState == ACTION_STATE_SWIPE) {
-            setTouchListener(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            setTouchListener(recyclerView)
         }
         if (dX < -500 && !isSwiped) {
             isSwiped = true
@@ -68,13 +68,9 @@ class CarListSwipeHelper(private val controller: SwipeControllerActions, private
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setTouchListener(
-        c: Canvas,
-        recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder,
-        dX: Float, dY: Float,
-        actionState: Int, isCurrentlyActive: Boolean
+        recyclerView: RecyclerView
     ) {
-        recyclerView.setOnTouchListener { v, event ->
+        recyclerView.setOnTouchListener { _, event ->
             swipeBack = event.action == MotionEvent.ACTION_CANCEL || event.action == MotionEvent.ACTION_UP
             false
         }

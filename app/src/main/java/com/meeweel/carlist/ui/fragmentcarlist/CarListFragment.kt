@@ -26,6 +26,9 @@ import com.meeweel.carlist.domain.CarColor
 import com.meeweel.carlist.domain.CarListState
 import com.meeweel.carlist.domain.CarModel
 import com.meeweel.carlist.ui.fragmentcardetails.CarDetailsFragment.Companion.ARG_CAR_ID
+import com.meeweel.carlist.ui.fragmentcarlist.adapter.CarListFragmentAdapter
+import com.meeweel.carlist.ui.fragmentcarlist.adapter.CarListSwipeHelper
+import com.meeweel.carlist.ui.fragmentcarlist.adapter.SwipeControllerActions
 
 
 class CarListFragment : Fragment() {
@@ -93,6 +96,29 @@ class CarListFragment : Fragment() {
             }
         } else {
             setImage(bottomSheetBinding.bottomSheetCarImage, EXAMPLE_IMAGE_URL)
+        }
+        bottomSheetBinding.apply {
+            bottomSheetAddBtn.setOnClickListener {
+                try {
+                    val mileage = bottomSheetMileage.text.toString().toInt()
+                    val newCarData = CarModel(
+                        car?.id ?: 0,
+                        brands[bottomSheetBrandSpinner.selectedItemPosition],
+                        bottomSheetModel.text.toString(),
+                        bottomSheetYear.text.toString().toInt(),
+                        car?.image ?: EXAMPLE_IMAGE_URL,
+                        mileage == 0,
+                        mileage,
+                        colors[bottomSheetColorSpinner.selectedItemPosition],
+                        bottomSheetCost.text.toString().toInt()
+                    )
+                    viewModel.addNewCarData(newCarData)
+                } catch (e: Exception) {
+                    toast(e.message.toString())
+                } finally {
+                    bottomSheetDialog.dismiss()
+                }
+            }
         }
         bottomSheetDialog.show()
     }

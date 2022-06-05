@@ -1,4 +1,4 @@
-package com.meeweel.carlist.ui.fragmentcarlist
+package com.meeweel.carlist.ui.fragmentcarlist.adapter
 
 import com.meeweel.carlist.domain.CarModel
 
