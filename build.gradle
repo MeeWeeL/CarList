@@ -5,6 +5,30 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.6.20' apply false
 }
 
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.findPlugin('android') ?: project.plugins.findPlugin('android-library')) {
+            android {
+                compileSdkVersion Config.compile_sdk
+
+                buildFeatures {
+                    viewBinding true
+                }
+
+                defaultConfig {
+                    minSdkVersion Config.min_sdk
+                    targetSdkVersion Config.target_sdk
+                }
+
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+            }
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

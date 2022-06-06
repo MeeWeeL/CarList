@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_SWIPE
 import androidx.recyclerview.widget.RecyclerView
 
-
 class CarListSwipeHelper(private val controller: SwipeControllerActions, private val adapter: CarListFragmentAdapter) :
     ItemTouchHelper.Callback() {
 

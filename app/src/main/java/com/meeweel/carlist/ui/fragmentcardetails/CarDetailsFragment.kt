@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.meeweel.carlist.databinding.FragmentCarDetailsBinding
-import com.meeweel.carlist.domain.CarModel
+import com.meeweel.core.domain.CarModel
 import com.meeweel.carlist.util.loadPicture
 
 class CarDetailsFragment : Fragment() {

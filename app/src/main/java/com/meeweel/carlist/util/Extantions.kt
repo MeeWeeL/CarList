@@ -7,8 +7,8 @@ import android.widget.Spinner
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.meeweel.carlist.R
-import com.meeweel.carlist.domain.CarBrand
-import com.meeweel.carlist.domain.CarColor
+import com.meeweel.core.domain.CarBrand
+import com.meeweel.core.domain.CarColor
 
 fun ImageView.loadPicture(imageUrl: String) {
     Glide.with(this.context)

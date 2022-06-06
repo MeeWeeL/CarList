@@ -5,17 +5,17 @@ plugins {
 }
 
 android {
-    compileSdk 32
 
     defaultConfig {
-        applicationId "com.meeweel.carlist"
-        minSdk 23
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
-
+        applicationId Config.application_id
+        minSdkVersion Config.min_sdk
+        targetSdkVersion Config.target_sdk
+        versionCode Releases.version_code
+        versionName Releases.version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    configurations { implementation.exclude group: 'org.jetbrains', module: 'annotations' }
 
     buildTypes {
         release {
@@ -23,63 +23,50 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-    buildFeatures {
-        viewBinding true
     }
 }
 
 dependencies {
 
+    implementation project(Modules.core)
+    implementation project(Modules.data)
     // Glide
-    def glide_version = "4.12.0"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
-    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt Glide.compiler_kapt
+    implementation Glide.glide
 
-    //Dagger 2
-    def dagger_version = "2.38"
-    implementation "com.google.dagger:dagger:2.41"
-    implementation "com.google.dagger:dagger-android:$dagger_version"
-    implementation "com.google.dagger:dagger-android-support:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:2.41"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    // Dagger
+    implementation Dagger.dagger
+    implementation Dagger.dagger_android
+    implementation Dagger.dagger_android_support
+    kapt Dagger.dagger_android_processor_kapt
+    kapt Dagger.dagger_compiler_kapt
 
-    //Room
-    def room_version = "2.4.2"
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-rxjava3:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    // NavComponent
+    implementation NavComponent.nav_component_fragment
+    implementation NavComponent.nav_component_ui_ktx
 
-    // Retrofit
-    def retrofit_version = "2.9.0"
-    def okhttp_version = "4.9.3"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofit_version"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    // RxJava3
+    implementation RxJava3.rxjava3
+    implementation RxJava3.rxjava3_rxAndroid
 
-    // RxJava 3
-    def rx_version = "3.0.0"
-    implementation "io.reactivex.rxjava3:rxandroid:$rx_version"
-    implementation "io.reactivex.rxjava3:rxjava:$rx_version"
+    // AndroidX
+    implementation Base.appcompat
 
-    // Navigation component
-    def nav_version = "2.4.2"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    // Design
+    implementation Base.material
+    implementation Base.constraint_layout
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Kotlin
+    implementation Base.core_ktx
+
+    // Test
+    testImplementation Tests.junit_androidTestImplementation
+    androidTestImplementation Tests.junit_testImplementation
+    androidTestImplementation Tests.espresso_androidTestImplementation
+
+    // Для работы Null/NotNull аннотаций
+    implementation Annotations.annotation_library
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

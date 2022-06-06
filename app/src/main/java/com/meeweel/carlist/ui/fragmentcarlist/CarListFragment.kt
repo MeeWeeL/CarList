@@ -8,14 +8,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.meeweel.carlist.R
-import com.meeweel.carlist.domain.CarListState
-import com.meeweel.carlist.domain.CarModel
+import com.meeweel.core.domain.CarListState
+import com.meeweel.core.domain.CarModel
 import com.meeweel.carlist.ui.fragmentcardetails.CarDetailsFragment.Companion.ARG_CAR_ID
 import com.meeweel.carlist.ui.fragmentcarlist.adapter.CarListFragmentAdapter
 import com.meeweel.carlist.ui.fragmentcarlist.adapter.CarListSwipeHelper
 import com.meeweel.carlist.ui.fragmentcarlist.adapter.SwipeControllerActions
 import com.meeweel.carlist.util.toast
-
 
 class CarListFragment : BaseCarListFragment() {
 

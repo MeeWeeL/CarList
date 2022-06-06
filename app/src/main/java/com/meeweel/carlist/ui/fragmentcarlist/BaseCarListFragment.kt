@@ -12,9 +12,9 @@ import com.meeweel.carlist.databinding.BottomSheetCarChangingBinding
 import com.meeweel.carlist.databinding.CarListRecyclerFilterBinding
 import com.meeweel.carlist.databinding.FragmentFullscreenPhotoBinding
 import com.meeweel.carlist.databinding.FragmentMainRecyclerBinding
-import com.meeweel.carlist.domain.CarBrand
-import com.meeweel.carlist.domain.CarColor
-import com.meeweel.carlist.domain.CarModel
+import com.meeweel.core.domain.CarBrand
+import com.meeweel.core.domain.CarColor
+import com.meeweel.core.domain.CarModel
 import com.meeweel.carlist.util.*
 
 abstract class BaseCarListFragment : Fragment() {

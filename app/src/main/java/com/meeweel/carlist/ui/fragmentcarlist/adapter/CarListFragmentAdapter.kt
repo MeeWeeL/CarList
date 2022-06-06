@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.meeweel.carlist.databinding.ItemMainRecyclerBinding
-import com.meeweel.carlist.domain.CarModel
+import com.meeweel.core.domain.CarModel
 import com.meeweel.carlist.ui.fragmentcarlist.CarListFragment
 import com.meeweel.carlist.util.loadPicture
 

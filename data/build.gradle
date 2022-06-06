@@ -1,0 +1,26 @@
+plugins {
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+}
+
+dependencies {
+
+    implementation project(Modules.core)
+
+    implementation Room.room_runtime
+    implementation Room.room_rxjava3
+    kapt Room.room_compiler_kapt
+
+    implementation RxJava3.rxjava3
+    implementation RxJava3.rxjava3_rxAndroid
+
+    implementation Retrofit.retrofit2
+    implementation Retrofit.retrofit2_converter_gson
+    implementation Retrofit.retrofit2_adapter_rxjava3
+
+    implementation OkHttp.okhttp3
+    implementation OkHttp.okhttp3_logging_interceptor
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
