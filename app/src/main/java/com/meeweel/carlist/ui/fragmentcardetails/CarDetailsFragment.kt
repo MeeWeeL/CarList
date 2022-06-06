@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.meeweel.carlist.R
 import com.meeweel.carlist.databinding.FragmentCarDetailsBinding
 import com.meeweel.carlist.domain.CarModel
+import com.meeweel.carlist.util.loadPicture
 
 class CarDetailsFragment : Fragment() {
 
@@ -38,14 +36,6 @@ class CarDetailsFragment : Fragment() {
         setObserver(carId)
     }
 
-    private fun setImage(imageView: ImageView, imageUrl: String) {
-        Glide.with(imageView.context)
-            .load(imageUrl)
-            .error(R.drawable.ic_no_connection)
-            .placeholder(R.drawable.ic_car)
-            .into(imageView)
-    }
-
     private fun setObserver(carId: Int) {
         val observer = Observer<CarModel> { data ->
             renderData(data)
@@ -55,7 +45,7 @@ class CarDetailsFragment : Fragment() {
     }
 
     private fun renderData(data: CarModel) {
-        setImage(binding.detailsImage, data.image)
+        binding.detailsImage.loadPicture(data.image)
         binding.apply {
             detailsBrand.text = data.brand.brand
             detailsModel.text = data.model
