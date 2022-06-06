@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_car_details_scene"
+    tools:context=".ui.fragmentcardetails.CarDetailsFragment">
+
+    <ImageView
+        android:id="@+id/details_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/default_car_image"
+        app:layout_constraintBottom_toTopOf="@id/details_brand_label"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="2"
+        android:contentDescription="@string/details_image" />
+
+    <TextView
+        android:id="@+id/details_brand_label"
+        style="@style/detailsBrandLabelStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_brand"
+        style="@style/detailsBrandStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_model_label"
+        style="@style/detailsModelLabelStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_model"
+        style="@style/detailsModelStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_color_label"
+        style="@style/detailsColorLabelStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_color"
+        style="@style/detailsColorStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_is_new_label"
+        style="@style/detailsConditionLabelStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_is_new"
+        style="@style/detailsConditionStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_mileage_label"
+        style="@style/detailsMileageLabelStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_mileage"
+        style="@style/detailsMileageStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_cost_label"
+        style="@style/detailsCostLabelStyle"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/details_cost"
+        style="@style/detailsCostStyle"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.motion.widget.MotionLayout>

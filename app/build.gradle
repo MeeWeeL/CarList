@@ -1,30 +1,27 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
-    compileSdk 32
 
     defaultConfig {
-        applicationId "com.meeweel.carlist"
-        minSdk 23
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
-
+        applicationId Config.application_id
+        minSdkVersion Config.min_sdk
+        targetSdkVersion Config.target_sdk
+        versionCode Releases.version_code
+        versionName Releases.version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    configurations { implementation.exclude group: 'org.jetbrains', module: 'annotations' }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -33,11 +30,43 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation project(Modules.core)
+    implementation project(Modules.data)
+    // Glide
+    kapt Glide.compiler_kapt
+    implementation Glide.glide
+
+    // Dagger
+    implementation Dagger.dagger
+    implementation Dagger.dagger_android
+    implementation Dagger.dagger_android_support
+    kapt Dagger.dagger_android_processor_kapt
+    kapt Dagger.dagger_compiler_kapt
+
+    // NavComponent
+    implementation NavComponent.nav_component_fragment
+    implementation NavComponent.nav_component_ui_ktx
+
+    // RxJava3
+    implementation RxJava3.rxjava3
+    implementation RxJava3.rxjava3_rxAndroid
+
+    // AndroidX
+    implementation Base.appcompat
+
+    // Design
+    implementation Base.material
+    implementation Base.constraint_layout
+
+    // Kotlin
+    implementation Base.core_ktx
+
+    // Test
+    testImplementation Tests.junit_androidTestImplementation
+    androidTestImplementation Tests.junit_testImplementation
+    androidTestImplementation Tests.espresso_androidTestImplementation
+
+    // Для работы Null/NotNull аннотаций
+    implementation Annotations.annotation_library
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

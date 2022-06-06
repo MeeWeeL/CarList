@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/popup_menu">
+        <item
+            android:id="@+id/by_brand"
+            android:icon="@drawable/ic_sort"
+            android:title="@string/sort_by_brand_name" />
+        <item
+            android:id="@+id/by_model"
+            android:icon="@drawable/ic_filter"
+            android:title="@string/sort_by_model" />
+        <item
+            android:id="@+id/by_cost_down"
+            android:icon="@drawable/ic_filter"
+            android:title="@string/sort_by_cost_down" />
+        <item
+            android:id="@+id/by_cost_up"
+            android:icon="@drawable/ic_filter"
+            android:title="@string/sort_by_cost_up" />
+    </group>
+</menu>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/recyclerItemCardStyle">
+
+    <LinearLayout
+        style="@style/recyclerRootLinearLayoutStyle">
+
+        <ImageView
+            android:id="@+id/image"
+            style="@style/recyclerItemImageStyle"
+            android:contentDescription="@string/recyclerItemImageContent" />
+
+        <LinearLayout
+            style="@style/recyclerDescriptionLinearLayoutStyle">
+
+            <TextView
+                android:id="@+id/brand"
+                style="@style/recyclerItemBrandStyle"/>
+
+            <TextView
+                android:id="@+id/model"
+                style="@style/recyclerItemModelStyle"/>
+
+            <TextView
+                android:id="@+id/color"
+                style="@style/recyclerItemColorStyle"/>
+
+            <TextView
+                android:id="@+id/condition"
+                style="@style/recyclerItemConditionStyle"/>
+
+            <TextView
+                android:id="@+id/cost"
+                style="@style/recyclerItemCostStyle"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

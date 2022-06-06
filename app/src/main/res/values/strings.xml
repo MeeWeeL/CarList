@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">Car List</string>
+    <string name="item_recycler_default_cost">1200000 rub</string>
+    <string name="item_recycler_default_condition">2008, 20000km</string>
+    <string name="item_recycler_default_color">Black</string>
+    <string name="item_recycler_default_model">X6</string>
+    <string name="item_recycler_default_brand">BMW</string>
+    <string name="recyclerItemImageContent">recyclerItemImageContent</string>
+    <string name="zoomed_image">ZoomedImage</string>
+    <string name="brand_label_default_text">Brand :</string>
+    <string name="brand_default_text">BMW</string>
+    <string name="model_label_default_text">Model :</string>
+    <string name="model_default_text">X5 II (E50)</string>
+    <string name="color_label_default_text">Color :</string>
+    <string name="color_default_text">Black</string>
+    <string name="condition_label_default_text">Condition :</string>
+    <string name="condition_default_text">New</string>
+    <string name="mileage_label_default_text">Mileage :</string>
+    <string name="mileage_default_text">0 km</string>
+    <string name="cost_label_default_text">Cost :</string>
+    <string name="cost_default_text">3650000 RUB</string>
+    <string name="details_image">DetailsImage</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
+    <string name="ok">OK</string>
+    <string name="sort_by_brand_name">Sort by brand name</string>
+    <string name="sort_by_model">Sort by model</string>
+    <string name="sort_by_cost_down">Sort by cost down</string>
+    <string name="sort_by_cost_up">Sort by cost up</string>
+    <string name="fab">FAB</string>
+    <string name="title">Title</string>
+    <string name="year_label_default_text">Year :</string>
+    <string name="add">Add</string>
 </resources>

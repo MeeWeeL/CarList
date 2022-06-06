@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--  *****************  Main Recycler Item Styles  *****************  -->
+
+    <!--  CardView  -->
+    <style name="recyclerItemCardStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/item_recycler_card_margin_top</item>
+        <item name="cardCornerRadius">@dimen/item_recycler_card_corner_radius</item>
+        <item name="cardElevation">@dimen/item_recycler_card_elevation</item>
+    </style>
+
+    <!--  Image  -->
+    <style name="recyclerItemImageStyle">
+        <item name="android:layout_width">@dimen/item_recycler_image_width</item>
+        <item name="android:layout_height">@dimen/item_recycler_image_height</item>
+        <item name="android:src">@drawable/default_car_image</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <!--  Brand  -->
+    <style name="recyclerItemBrandStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/item_recycler_default_brand</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/item_recycler_brand_text_size</item>
+    </style>
+
+    <!--  Brand  -->
+    <style name="recyclerItemColorStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">start</item>
+        <item name="android:text">@string/item_recycler_default_color</item>
+    </style>
+
+    <!--  Condition  -->
+    <style name="recyclerItemConditionStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">start</item>
+        <item name="android:text">@string/item_recycler_default_condition</item>
+    </style>
+
+    <!--  Model  -->
+    <style name="recyclerItemModelStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/item_recycler_default_model</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--  Cost  -->
+    <style name="recyclerItemCostStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">end|center</item>
+        <item name="android:text">@string/item_recycler_default_cost</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--  Description LinearLayout  -->
+    <style name="recyclerDescriptionLinearLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingStart">@dimen/item_recycler_description_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/item_recycler_description_horizontal_padding</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!--  Root LinearLayout  -->
+    <style name="recyclerRootLinearLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!--  *****************  Details Fragment Styles  *****************  -->
+
+<!--  Base Details Style  -->
+    <style name="baseDetailsStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">center|start</item>
+        <item name="layout_constraintVertical_weight">1</item>
+    </style>
+
+    <!--  Brand Label  -->
+    <style name="detailsBrandLabelStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/brand_label_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_image</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toStartOf">@+id/details_brand</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_model_label</item>
+    </style>
+
+    <!--  Brand  -->
+    <style name="detailsBrandStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/brand_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_image</item>
+        <item name="layout_constraintStart_toEndOf">@+id/details_brand_label</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_model_label</item>
+    </style>
+
+    <!--  Model Label  -->
+    <style name="detailsModelLabelStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/model_label_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_brand_label</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toStartOf">@+id/details_model</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_color_label</item>
+    </style>
+
+    <!--  Model  -->
+    <style name="detailsModelStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/model_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_brand_label</item>
+        <item name="layout_constraintStart_toEndOf">@+id/details_model_label</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_color_label</item>
+    </style>
+
+    <!--  Color Label  -->
+    <style name="detailsColorLabelStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/color_label_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_model_label</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toStartOf">@+id/details_color</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_is_new_label</item>
+    </style>
+
+    <!--  Color  -->
+    <style name="detailsColorStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/color_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_model_label</item>
+        <item name="layout_constraintStart_toEndOf">@+id/details_color_label</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_is_new_label</item>
+    </style>
+
+    <!--  Condition Label  -->
+    <style name="detailsConditionLabelStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/condition_label_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_color_label</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toStartOf">@+id/details_is_new</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_mileage_label</item>
+    </style>
+
+    <!--  Condition  -->
+    <style name="detailsConditionStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/condition_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_color_label</item>
+        <item name="layout_constraintStart_toEndOf">@+id/details_is_new_label</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_mileage_label</item>
+    </style>
+
+    <!--  Mileage Label  -->
+    <style name="detailsMileageLabelStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/mileage_label_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_is_new_label</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toStartOf">@+id/details_mileage</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_cost_label</item>
+    </style>
+
+    <!--  Condition  -->
+    <style name="detailsMileageStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/mileage_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_is_new_label</item>
+        <item name="layout_constraintStart_toEndOf">@+id/details_mileage_label</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintBottom_toTopOf">@id/details_cost_label</item>
+    </style>
+
+    <!--  Cost Label  -->
+    <style name="detailsCostLabelStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/cost_label_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_mileage_label</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toStartOf">@+id/details_cost</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+    <!--  Condition  -->
+    <style name="detailsCostStyle" parent="baseDetailsStyle">
+        <item name="android:text">@string/cost_default_text</item>
+        <item name="layout_constraintTop_toBottomOf">@id/details_mileage_label</item>
+        <item name="layout_constraintStart_toEndOf">@+id/details_cost_label</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+</resources>
