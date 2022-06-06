@@ -1,16 +1,14 @@
 package com.meeweel.carlist.data.repository
 
 import com.meeweel.carlist.data.local.LocalDataSource
-import com.meeweel.carlist.data.local.LocalDataSourceImpl
 import com.meeweel.carlist.data.remote.RemoteDataSource
-import com.meeweel.carlist.data.remote.RemoteDataSourceImpl
 import com.meeweel.carlist.domain.CarModel
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 class RepositoryImpl(
-    private val remoteDB: RemoteDataSource = RemoteDataSourceImpl(),
-    private val localDB: LocalDataSource = LocalDataSourceImpl()
+    private val remoteDB: RemoteDataSource,
+    private val localDB: LocalDataSource
 ) : Repository {
 
     override fun getCarList(): Single<List<CarModel>> {
@@ -21,7 +19,7 @@ class RepositoryImpl(
         return localDB.getCarById(carId)
     }
 
-    override fun addNewCarData(newCarData: CarModel) : Completable {
+    override fun addNewCarData(newCarData: CarModel): Completable {
         return localDB.addNewCarData(newCarData)
     }
 

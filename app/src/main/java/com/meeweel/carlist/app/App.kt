@@ -1,18 +1,22 @@
 package com.meeweel.carlist.app
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
+import com.meeweel.carlist.di.AppComponent
+import com.meeweel.carlist.di.DaggerAppComponent
 
 class App : Application() {
 
+    lateinit var component: AppComponent
+
     override fun onCreate() {
         super.onCreate()
-        context = this
+        appInstance = this
+        component = DaggerAppComponent.builder()
+            .setContext(this)
+            .build()
     }
 
-    companion object ContextHolder {
-        @SuppressLint("StaticFieldLeak")
-        lateinit var context: Context
+    companion object {
+        lateinit var appInstance: App
     }
 }

@@ -3,16 +3,24 @@ package com.meeweel.carlist.ui.fragmentcarlist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.meeweel.carlist.app.App
 import com.meeweel.carlist.data.repository.Repository
-import com.meeweel.carlist.data.repository.RepositoryImpl
 import com.meeweel.carlist.domain.CarBrand
 import com.meeweel.carlist.domain.CarListState
 import com.meeweel.carlist.domain.CarModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class CarListViewModel(private val repository: Repository = RepositoryImpl()) : ViewModel() {
+class CarListViewModel : ViewModel() {
+
+    @Inject
+    lateinit var repository: Repository
+
+    init {
+        App.appInstance.component.inject(this)
+    }
 
     private var dataList: List<CarModel> = listOf()
     private val liveDataToObserve: MutableLiveData<CarListState> = MutableLiveData()
