@@ -2,14 +2,14 @@ package com.meeweel.carlist.data.repository
 
 import com.meeweel.carlist.data.local.LocalDataSource
 import com.meeweel.carlist.data.local.LocalDataSourceImpl
-import com.meeweel.carlist.data.remote.FakeRemoteDataSourceImpl
 import com.meeweel.carlist.data.remote.RemoteDataSource
+import com.meeweel.carlist.data.remote.RemoteDataSourceImpl
 import com.meeweel.carlist.domain.CarModel
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 class RepositoryImpl(
-    private val remoteDB: RemoteDataSource = FakeRemoteDataSourceImpl(),
+    private val remoteDB: RemoteDataSource = RemoteDataSourceImpl(),
     private val localDB: LocalDataSource = LocalDataSourceImpl()
 ) : Repository {
 

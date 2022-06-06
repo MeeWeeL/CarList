@@ -9,5 +9,5 @@ data class CarModel(
     val isNew: Boolean,
     val mileage: Int,
     val color: CarColor,
-    val cost: Int,
+    val cost: Int
 )

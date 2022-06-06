@@ -36,8 +36,8 @@ class CarListViewModel(private val repository: Repository = RepositoryImpl()) : 
     }
 
     private fun Single<List<CarModel>>.subscribeForCars() {
-        this.observeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
+        this.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 liveDataToObserve.postValue(CarListState.Loading)
             }
@@ -87,8 +87,8 @@ class CarListViewModel(private val repository: Repository = RepositoryImpl()) : 
 
     fun addNewCarData(newCarData: CarModel) {
         repository.addNewCarData(newCarData)
-            .observeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 getCarList()
             },{})
