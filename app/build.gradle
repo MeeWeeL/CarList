@@ -47,6 +47,9 @@ dependencies {
     implementation NavComponent.nav_component_fragment
     implementation NavComponent.nav_component_ui_ktx
 
+    // Room
+    implementation Room.room_runtime
+
     // RxJava3
     implementation RxJava3.rxjava3
     implementation RxJava3.rxjava3_rxAndroid
